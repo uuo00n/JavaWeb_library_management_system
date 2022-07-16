@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -30,6 +31,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
         req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html;charset=utf-8");
         PrintWriter out = resp.getWriter();
@@ -39,9 +41,20 @@ public class UserServlet extends HttpServlet {
         switch (method) {
             case "login":
 
-                //2.从login.html中获取用户名和密码
+                //2.从login.html中获取用户名和密码，验证码
                 String name = req.getParameter("name");
                 String pwd = req.getParameter("pwd");
+                String userCode = req.getParameter("valcode");
+
+                //2.2 提取session中的验证码，进行判断
+                String code = session.getAttribute("code").toString();
+                //不区分大小写
+
+                if (!code.equalsIgnoreCase(userCode)){
+                    out.println("<script>alert('验证码输入错误');location.href = 'login.html';</script>");
+                    return;
+                }
+
 
                 //3.调用UserBiz的getUser方法，根据用户名和密码获取对应的用户对象
                 User user = userBiz.getUser(name, pwd);
@@ -52,6 +65,7 @@ public class UserServlet extends HttpServlet {
                     out.println("<script>alert('用户名或密码不存在');location.href = 'login.html';</script>");
                 } else {
                     //4.2 非空:表示登录成功，将用户对象保存session中，提示登录成功后，将页而跳转到index.jsp
+                    session.setAttribute("user",user);
                     out.println("<script>alert('登陆成功');location.href='index.jsp';</script>");
 
                 }
