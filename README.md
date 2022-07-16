@@ -28,8 +28,6 @@ https://github.com/uuo00n/management_system/blob/main/Programs%20and%20configura
 
 ## 声明：
 
-Part of the source code of this project comes from lecturers in BiliBili platform : [凤姐说_Java](https://space.bilibili.com/2018274088)
-
 Specific teaching videos are from : [【Java项目实战】Javaweb图书管理系统](https://www.bilibili.com/video/BV1xh41147MZ?spm_id_from=333.999.0.0&vd_source=a5dbc66ce0b1dacad2397b1b3108dd8c)
 
 The rest were developed by the author (uuo00_n).
@@ -39,8 +37,6 @@ Once again, this project is for learning only, without any commercial interests.
 If infringement is involved, please contact the project Author: uuo00_n@outlook.com
 
 ------
-
-本项目中的其中部分源码来自bilibili平台中的讲师：[凤姐说_Java](https://space.bilibili.com/2018274088)
 
 具体教学视频来自：[【Java项目实战】Javaweb图书管理系统](https://www.bilibili.com/video/BV1xh41147MZ?spm_id_from=333.999.0.0&vd_source=a5dbc66ce0b1dacad2397b1b3108dd8c)
 
