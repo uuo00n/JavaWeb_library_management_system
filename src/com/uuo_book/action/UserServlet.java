@@ -23,7 +23,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        doPost(req, resp);
     }
     //user.let?type=login 登录
     //user.let?type=exit 安全退出
@@ -50,7 +50,7 @@ public class UserServlet extends HttpServlet {
                 String code = session.getAttribute("code").toString();
                 //不区分大小写
 
-                if (!code.equalsIgnoreCase(userCode)){
+                if (!code.equalsIgnoreCase(userCode)) {
                     out.println("<script>alert('验证码输入错误');location.href = 'login.html';</script>");
                     return;
                 }
@@ -65,12 +65,17 @@ public class UserServlet extends HttpServlet {
                     out.println("<script>alert('用户名或密码不存在');location.href = 'login.html';</script>");
                 } else {
                     //4.2 非空:表示登录成功，将用户对象保存session中，提示登录成功后，将页而跳转到index.jsp
-                    session.setAttribute("user",user);
+                    session.setAttribute("user", user);
                     out.println("<script>alert('登陆成功');location.href='index.jsp';</script>");
 
                 }
                 break;
-
+            case "exit":
+                //1.清除session
+                session.invalidate();
+                //2.跳转到login.html(框架中需要回去)  top.jsp->parent->index.jsp
+                out.println("<script>parent.window.location.href='login.html';</script>");
+                break;
         }
 
     }
