@@ -33,6 +33,22 @@ public class UserDao {
         return user;
     }
 
+    /**
+     * 修改密码
+     *
+     * @param id  需要修改密码的用户编号
+     * @param pwd 新的密码
+     * @return 修改的数据行
+     */
+    public int modifyPwd(long id, String pwd) throws SQLException {
+        String sql = "UPDATE user set pwd = ? WHERE id = ?;";
+        Connection conn = DBHelper.getConnection();
+        int count = runner.update(conn, sql, pwd, id);
+        conn.close();
+        return count;
+    }
+
+
     public static void main(String[] args) {
         User user = null;
         try {

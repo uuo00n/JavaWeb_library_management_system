@@ -76,6 +76,24 @@ public class UserServlet extends HttpServlet {
                 //2.跳转到login.html(框架中需要回去)  top.jsp->parent->index.jsp
                 out.println("<script>parent.window.location.href='login.html';</script>");
                 break;
+            case "modifyPwd":
+                //修改密码
+                //1获取用户输入的新密码
+                String newPwd = req.getParameter("newpwd");
+
+                //2.获取用户的编号-session
+                long id = ((User) session.getAttribute("user")).getId();
+
+                //3.调用biz层的方法
+                int count = userBiz.modifyPwd(id, newPwd);
+
+                //4.相应-参考exit
+                if (count > 0) {
+                    out.println("<script>alert('密码修改成功');parent.window.location.href='login.html';</script>");
+                } else {
+                    out.println("<script>alert('密码修改失败')</script>");
+                }
+                break;
         }
 
     }

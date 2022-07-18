@@ -14,13 +14,23 @@ public class UserBiz {
     UserDao userDao = new UserDao();
 
     public User getUser(String name, String pwd) {
-        User user = null;
+        //传递
         try {
-            user = userDao.getUser(name, pwd);
+            return userDao.getUser(name, pwd);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+
+    public int modifyPwd(long id, String pwd) {
+        int count = 0;
+        try {
+            count = userDao.modifyPwd(id, pwd);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return user;
+        return count;
     }
 }
 
